@@ -58,7 +58,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'jzqt'
-copyright = '2017~%s, JZQT'.format(datetime.now().year)
+copyright = '2017~{}, JZQT'.format(datetime.now().year)
 author = 'JZQT'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -172,9 +172,6 @@ texinfo_documents = [
     (master_doc, 'jzqt', 'jzqt Documentation', author, 'jzqt',
      'One line description of project.', 'Miscellaneous'),
 ]
-
-
-
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}

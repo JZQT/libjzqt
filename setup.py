@@ -10,6 +10,7 @@ setup(
     packages=['jzqt'],
     author='JZQT',
     author_email='561484726@qq.com',
+    url="https://github.com/JZQT/jzqt",
     description="Python tools library",
     license='MIT',
 )
