@@ -12,6 +12,7 @@ Welcome to jzqt's documentation!
 
     timetools
     containers
+    releases
 
 
 Indices and tables
