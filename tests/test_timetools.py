@@ -10,18 +10,23 @@ import jzqt.timetools as jt
 class TestTimerange(object):
 
     def test_init_raise_value_error(self):
-        msg = 'timerange() arg 3 must not be timedelta(0)'
-        with pytest.raises(ValueError, message=msg):
+        with pytest.raises(ValueError) as exc_info:
             jt.timerange(datetime(2017, 1, 1), datetime(2017, 2, 2), timedelta())
+        msg = 'timerange() arg 3 must not be timedelta(0)'
+        assert exc_info.value.args == (msg,)
 
-    def test_init_raise_type_error(self):
-        msg = 'timerange() arg {} must be date or datetime object'
-        with pytest.raises(TypeError, message=msg.format(1)):
-            jt.timerange(100, datetime(2017, 2, 3))
-        with pytest.raises(TypeError, message=msg.format(2)):
-            jt.timerange(date(2017, 2, 3), 4)
-        with pytest.raises(TypeError, message=msg.format(3)):
-            jt.timerange(date(2017, 2, 3), date(2017, 4, 5), 24 * 60 * 60)
+    @pytest.mark.parametrize('func, arg_pos', [
+        (lambda: jt.timerange(100, datetime(2017, 2, 3)), 1),
+        (lambda: jt.timerange(date(2017, 2, 3), 4), 2),
+        (lambda: jt.timerange(date(2017, 2, 3), date(2017, 4, 5), 86400), 3),
+    ])
+    def test_init_raise_type_error(self, func, arg_pos):
+        with pytest.raises(TypeError) as exc_info:
+            func()
+        arg_type = 'timedelta' if arg_pos == 3 else 'date or datetime'
+        assert exc_info.value.args == (
+            'timerange() arg {} must be {} object'.format(arg_pos, arg_type),
+        )
 
     @pytest.mark.parametrize('start, stop, step, results', [
         (date(1970, 1, 1), date(1970, 2, 1), 15 * jt.DAY,

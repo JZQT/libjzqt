@@ -25,8 +25,9 @@ class TestObjectDict(object):
 
     def test_getattr_raise_attribute_error(self):
         obj = ObjectDict()
-        with pytest.raises(AttributeError, message='a'):
+        with pytest.raises(AttributeError) as exc_info:
             print(obj.not_exist_attr)
+        assert exc_info.value.args == ('not_exist_attr',)
 
     def test_set_attr(self):
         obj = ObjectDict()
