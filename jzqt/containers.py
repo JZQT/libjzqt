@@ -24,6 +24,12 @@ class ObjectDict(dict):
     def __setattr__(self, name, value):
         self[name] = value
 
+    def __delattr__(self, name):
+        try:
+            del self[name]
+        except KeyError:
+            raise AttributeError(name)
+
 
 class FrozenDict(dict):
     """Immutable dict."""

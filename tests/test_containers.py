@@ -14,7 +14,7 @@ class TestObjectDict(object):
         iterable_object = [('a', 1), (2, None), (None, ''), ('', False)]
         assert ObjectDict(iterable_object) == dict(iterable_object)
 
-    def test_get_attr(self):
+    def test_getattr(self):
         obj = ObjectDict({
             'name': 'JZQT',
             'get': 'data'
@@ -29,12 +29,23 @@ class TestObjectDict(object):
             print(obj.not_exist_attr)
         assert exc_info.value.args == ('not_exist_attr',)
 
-    def test_set_attr(self):
+    def test_setattr(self):
         obj = ObjectDict()
         obj.name = 'JZQT'
         obj.get = 1
         assert obj['name'] == 'JZQT'
         assert obj['get'] == 1
+
+    def test_delattr(self):
+        obj = ObjectDict({'name': 'jzqt'})
+        del obj.name
+        assert obj == ObjectDict()
+
+    def test_delattr_raise_attribute_error(self):
+        obj = ObjectDict()
+        with pytest.raises(AttributeError) as exc_info:
+            del obj.name
+        assert exc_info.value.args == ('name',)
 
 
 class TestFrozenDict(object):
