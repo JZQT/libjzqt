@@ -2,7 +2,7 @@
 """Date and time tools"""
 
 from calendar import isleap
-from datetime import date, time, datetime, timedelta
+from datetime import date, datetime, timedelta
 
 DAY = timedelta(1)
 HOUR = timedelta(hours=1)
@@ -24,7 +24,7 @@ class timerange(object):
     >>> list(timerange(datetime(1970, 1, 1, 1),
     ...      datetime(1970, 1, 1, 1, 4),
     ...      timedelta(hours=2)))
-    [datetime.datetime(1970, 1, 1, 1, 0), datetime.datetime(1970, 1, 1, 3, 0)] 
+    [datetime.datetime(1970, 1, 1, 1, 0), datetime.datetime(1970, 1, 1, 3, 0)]
     >>> list(timerange(date(2017, 12, 31), date(2018, 1, 2)))
     [datetime.date(2017, 12, 31), datetime.date(2018, 1, 1)]
     """
@@ -90,7 +90,7 @@ class timerange(object):
 
 def prev_month_first_day(dt):
     """Return last month first day.
-    
+
     >>> from datetime import datetime, date
     >>> print(prev_month_first_day(datetime(1970, 1, 1, 11, 11)))
     1969-12-01 11:11:00
@@ -130,7 +130,7 @@ def this_month_first_day(dt):
 
 def this_month_last_day(dt):
     """Return this month last day.
- 
+
     >>> from datetime import datetime, date
     >>> print(this_month_last_day(datetime(2000, 2, 9, 3)))
     2000-02-29 03:00:00
@@ -148,7 +148,7 @@ def this_month_last_day(dt):
 
 def next_month_first_day(dt):
     """Return next month first day.
- 
+
     >>> from datetime import datetime, date
     >>> print(next_month_first_day(datetime(1999, 12, 9, 3)))
     2000-01-01 03:00:00
