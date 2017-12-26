@@ -7,13 +7,5 @@ What's new in jzqt 0.1.0
 New modules
 ~~~~~~~~~~~
 
-* ``jzqt.timetools``. Date and time tools.
-    - ``prev_month_first_day``. Return last month first day.
-    - ``prev_month_last_day``. Return last month last day.
-    - ``this_month_first_day``. Return this month first day.
-    - ``this_month_last_day``. Return this month last day.
-    - ``next_month_first_day``. Return next month first day.
-    - ``next_month_last_day``. Return next month last day.
-    - ``timerange``. Time range object, like ``range``.
-* ``jzqt.containers``. Container data types.
-    - ``ObjectDict``. Dict subclass for support attribute style access.
+- `jzqt.timetools` provide tools related to time and date.
+- `jzqt.containers` provide container data types.
