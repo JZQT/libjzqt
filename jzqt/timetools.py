@@ -49,12 +49,12 @@ class timerange(object):
         step = self._step
         stop = self._stop
 
-        def should_stop_iteration():
+        def should_iterate():
             if step > timedelta():
                 return curr < stop
             return curr > stop
 
-        while should_stop_iteration():
+        while should_iterate():
             yield curr
             try:
                 curr += step
