@@ -9,6 +9,21 @@ import jzqt.timetools as jt
 
 class TestTimerange(object):
 
+    timerange_samples = [
+        jt.timerange(date(1, 1, 1), date(1, 1, 1), jt.DAY),
+        jt.timerange(date(1, 1, 1), date(1, 1, 1), -jt.DAY),
+        jt.timerange(date(1, 1, 1), date(1, 1, 2), jt.DAY),
+        jt.timerange(date(1, 1, 2), date(1, 1, 1), -jt.DAY),
+        jt.timerange(date(1, 1, 1), date(1, 1, 1), jt.DAY),
+        jt.timerange(date(2, 2, 2), date(1, 1, 1), jt.DAY),
+        jt.timerange(date(1, 1, 1), date(2, 2, 2), -jt.DAY),
+        jt.timerange(datetime(1, 1, 1), datetime(1, 1, 1, 1), jt.DAY),
+        jt.timerange(datetime(1, 1, 2), datetime(1, 1, 1), -jt.DAY),
+        jt.timerange(datetime(1, 1, 1, 1), datetime(1, 1, 1, 1), jt.DAY),
+        jt.timerange(datetime(1, 1, 1), datetime(2, 2, 2), -jt.DAY),
+        jt.timerange(datetime(2, 2, 2), datetime(1, 1, 1), jt.DAY),
+    ]
+
     def test_init_raise_value_error(self):
         with pytest.raises(ValueError) as exc_info:
             jt.timerange(datetime(2017, 1, 1), datetime(2017, 2, 2), timedelta())
@@ -60,6 +75,23 @@ class TestTimerange(object):
     ])
     def test_iter_datetime(self, start, stop, step, results):
         assert list(jt.timerange(start, stop, step)) == results
+
+    @pytest.mark.parametrize('timerange_object', timerange_samples)
+    def test_bool(self, timerange_object):
+        assert bool(timerange_object) == bool(list(timerange_object))
+
+    @pytest.mark.parametrize('timerange_object', timerange_samples)
+    def test_timerange_length(self, timerange_object):
+        assert len(timerange_object) == len(list(timerange_object))
+
+    @pytest.mark.parametrize('timerange_object', timerange_samples)
+    def test_to_str_and_repr(self, timerange_object):
+        answer = "timerange(start={}, stop={}, step={})".format(
+            repr(timerange_object.start),
+            repr(timerange_object.stop),
+            repr(timerange_object.step),
+        )
+        assert str(timerange_object) == repr(timerange_object) == answer
 
     def test_equal(self):
         assert jt.timerange(

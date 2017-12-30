@@ -11,6 +11,7 @@ SECOND = timedelta(seconds=1)
 MINUTE = timedelta(minutes=1)
 MICROSECOND = timedelta(microseconds=1)
 MILLISECOND = timedelta(milliseconds=1)
+ZERO_TIMEDELTA = timedelta()
 
 
 class timerange(object):
@@ -38,11 +39,36 @@ class timerange(object):
             step = timedelta(1)
         if not isinstance(step, timedelta):
             raise TypeError('timerange() arg 3 must be timedelta object')
-        if step == timedelta():
+        if step == ZERO_TIMEDELTA:
             raise ValueError('timerange() arg 3 must not be timedelta(0)')
         self._start = start
         self._stop = stop
         self._step = step
+        # compute length
+        if step > ZERO_TIMEDELTA and start > stop:
+            self._length = 0
+        elif step < ZERO_TIMEDELTA and start < stop:
+            self._length = 0
+        else:
+            delta_length = int((self._stop - self._start).total_seconds() * 1000000)
+            step_length = int(self._step.total_seconds() * 1000000)
+            self._length = int(delta_length / step_length)
+            if delta_length % step_length != 0:
+                self._length += 1
+
+    def __str__(self):
+        return "timerange(start={}, stop={}, step={})".format(
+            repr(self._start), repr(self._stop), repr(self._step)
+        )
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __bool__(self):
+        return bool(self._length)
+
+    def __len__(self):
+        return self._length
 
     def __iter__(self):
         curr = self._start
