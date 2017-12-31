@@ -100,6 +100,13 @@ class TestTimerange(object):
             date(1, 1, 1), date(1, 1, 1)
         )
 
+    def test_not_equal(self):
+        assert jt.timerange(
+            date(1, 1, 1), date(1, 1, 1)
+        ) != jt.timerange(
+            date(1, 1, 2), date(1, 1, 1)
+        )
+
     def test_start_not_equal(self):
         assert jt.timerange(
             date(1, 1, 1), date(1, 1, 1)
