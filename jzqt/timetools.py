@@ -114,7 +114,7 @@ class timerange(object):
         return self._step
 
 
-def prev_month_first_day(dt):
+def prev_month_first_day(dt=None):
     """Return last month first day.
 
     >>> from datetime import datetime, date
@@ -123,12 +123,13 @@ def prev_month_first_day(dt):
     >>> print(prev_month_first_day(date(1970, 8, 9)))
     1970-07-01
     """
+    dt = dt or datetime.now()
     if dt.month == 1:
         return dt.replace(year=dt.year - 1, month=12, day=1)
     return dt.replace(month=dt.month - 1, day=1)
 
 
-def prev_month_last_day(dt):
+def prev_month_last_day(dt=None):
     """Return last month last day.
 
     >>> from datetime import datetime, date
@@ -137,12 +138,13 @@ def prev_month_last_day(dt):
     >>> print(prev_month_last_day(date(1900, 3, 23)))
     1900-02-29
     """
+    dt = dt or datetime.now()
     if dt.month == 1:
         return this_month_last_day(dt.replace(year=dt.year - 1, month=12))
     return this_month_last_day(dt.replace(month=dt.month - 1, day=1))
 
 
-def this_month_first_day(dt):
+def this_month_first_day(dt=None):
     """Return this month first day.
 
     >>> from datetime import datetime, date
@@ -151,10 +153,11 @@ def this_month_first_day(dt):
     >>> print(this_month_first_day(date(1970, 1, 1)))
     1970-01-01
     """
+    dt = dt or datetime.now()
     return dt.replace(day=1)
 
 
-def this_month_last_day(dt):
+def this_month_last_day(dt=None):
     """Return this month last day.
 
     >>> from datetime import datetime, date
@@ -163,6 +166,7 @@ def this_month_last_day(dt):
     >>> print(this_month_last_day(date(1999, 8, 3)))
     1999-08-31
     """
+    dt = dt or datetime.now()
     if dt.month in {1, 3, 5, 7, 8, 10, 12}:
         return dt.replace(day=31)
     if dt.month != 2:
@@ -172,7 +176,7 @@ def this_month_last_day(dt):
     return dt.replace(day=28)
 
 
-def next_month_first_day(dt):
+def next_month_first_day(dt=None):
     """Return next month first day.
 
     >>> from datetime import datetime, date
@@ -181,12 +185,13 @@ def next_month_first_day(dt):
     >>> print(next_month_first_day(date(1999, 7, 3)))
     1999-08-01
     """
+    dt = dt or datetime.now()
     if dt.month == 12:
         return dt.replace(year=dt.year + 1, month=1, day=1)
     return dt.replace(month=dt.month + 1, day=1)
 
 
-def next_month_last_day(dt):
+def next_month_last_day(dt=None):
     """Return next month last day.
 
     >>> from datetime import datetime, date
@@ -195,6 +200,7 @@ def next_month_last_day(dt):
     >>> print(next_month_last_day(date(1999, 1, 3)))
     1999-02-28
     """
+    dt = dt or datetime.now()
     if dt.month == 12:
         return this_month_last_day(dt.replace(year=dt.year + 1, month=1))
     return this_month_last_day(dt.replace(month=dt.month + 1, day=1))
