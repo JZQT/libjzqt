@@ -1,0 +1,39 @@
+What's new in jzqt 0.2.0
+========================
+
+2018-01-01
+----------
+
+New modules
+~~~~~~~~~~~
+
+- `jzqt.importools` provide import related tools.
+
+General changes
+~~~~~~~~~~~~~~~
+
+`jzqt.containers`
+~~~~~~~~~~~~~~~~~
+
+- New class: `.FrozenDict` implements an immutable dict.
+- `.ObjectDict` ``__delattr__`` method is implemented.
+
+`jzqt.timetools`
+~~~~~~~~~~~~~~~~
+
+- The following `.timerange` methods are implemented
+
+    - ``__ne__``
+    - ``__len__``
+    - ``__str__``
+    - ``__repr__``
+    - ``__bool__``
+
+- The following function now support no arguments, default argument value is `datetime.datetime.now()`
+
+    - `.prev_month_first_day`
+    - `.prev_month_last_day`
+    - `.this_month_first_day`
+    - `.this_month_last_day`
+    - `.next_month_first_day`
+    - `.next_month_last_day`
