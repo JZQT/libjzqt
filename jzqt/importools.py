@@ -5,8 +5,9 @@
 def import_object(name):
     """Imports an object by name.
 
-    import_object('a') is equivalent to 'import a'.
-    import_object('a.b.c') is equivalent to 'from a.b import c'.
+    ``import_object('a')`` is equivalent to ``import a``.
+
+    ``import_object('a.b.c')`` is equivalent to ``from a.b import c``.
 
     >>> import os.path
     >>> import_object('os') is os
@@ -16,6 +17,9 @@ def import_object(name):
     >>> import_object('os.path.dirname') is os.path.dirname
     True
     >>> import_object('os.path.object_not_exist')
+    Traceback (most recent call last):
+        ......
+    ImportError: cannot from os.path import not_exist
     """
     if '.' not in name:
         return __import__(name, None, None)

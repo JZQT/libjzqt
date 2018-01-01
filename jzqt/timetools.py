@@ -19,15 +19,13 @@ class timerange(object):
 
     timerange(start, stop[, step]) -> timerange object
 
-    >>> from datetime import date, datetime, timedelta
-    >>> list(timerange(datetime(1970, 1, 1), datetime(19701, 1, 3)))
+    >>> from datetime import date, datetime
+    >>> list(timerange(datetime(1970, 1, 1), datetime(1970, 1, 3)))
     [datetime.datetime(1970, 1, 1, 0, 0), datetime.datetime(1970, 1, 2, 0, 0)]
-    >>> list(timerange(datetime(1970, 1, 1, 1),
-    ...      datetime(1970, 1, 1, 1, 4),
-    ...      timedelta(hours=2)))
-    [datetime.datetime(1970, 1, 1, 1, 0), datetime.datetime(1970, 1, 1, 3, 0)]
     >>> list(timerange(date(2017, 12, 31), date(2018, 1, 2)))
     [datetime.date(2017, 12, 31), datetime.date(2018, 1, 1)]
+    >>> len(timerange(datetime(1970, 1, 1, 1), datetime(1970, 1, 1, 3), HOUR))
+    2
     """
 
     def __init__(self, start, stop, step=None):
@@ -139,7 +137,7 @@ def prev_month_last_day(dt=None):
     >>> print(prev_month_last_day(datetime(2017, 1, 31, 1, 1)))
     2016-12-31 01:01:00
     >>> print(prev_month_last_day(date(1900, 3, 23)))
-    1900-02-29
+    1900-02-28
     """
     dt = dt or datetime.now()
     if dt.month == 1:
