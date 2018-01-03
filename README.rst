@@ -21,5 +21,5 @@ Installation
 .. |license| image:: https://img.shields.io/badge/license-MIT-blue.svg
     :target: https://github.com/JZQT/jzqt
 
-.. |version| image:: https://img.shields.io/badge/version-0.1.0-blue.svg
+.. |version| image:: https://img.shields.io/badge/version-0.2.0-blue.svg
     :target: https://github.com/JZQT/jzqt
